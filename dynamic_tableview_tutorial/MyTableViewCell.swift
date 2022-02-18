@@ -14,11 +14,10 @@ class MyTableViewCell: UITableViewCell {
     
     @IBOutlet weak var userContentLabel: UILabel!
     
+    @IBOutlet weak var tableItemCount: UILabel!
     // 쎌이 랜더링 될때
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        print("MyTableViewCell - awakeFromNib() called()")
         
         userProfileImg.layer.cornerRadius = userProfileImg.frame.height / 2
     }

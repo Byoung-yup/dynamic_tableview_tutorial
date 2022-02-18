@@ -40,7 +40,7 @@
                             </label>
                         </subviews>
                     </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="안녕하세요. 개발자 Dev_Kim 입니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXd-tI-8Hz">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="안녕하세요. 개발자 Dev_Kim 입니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXd-tI-8Hz">
                         <rect key="frame" x="20" y="85" width="251" height="43.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -79,6 +79,12 @@
                         </subviews>
                         <color key="tintColor" systemColor="systemGrayColor"/>
                     </stackView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AbY-cg-k26">
+                        <rect key="frame" x="385.5" y="145.5" width="8.5" height="20.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="Xm4-VP-VNr" secondAttribute="bottom" constant="15" id="08W-b7-hGT"/>
@@ -86,8 +92,10 @@
                     <constraint firstItem="Xm4-VP-VNr" firstAttribute="top" secondItem="dXd-tI-8Hz" secondAttribute="bottom" constant="16.5" id="9qx-7j-TVb"/>
                     <constraint firstItem="dXd-tI-8Hz" firstAttribute="top" secondItem="Otd-Gf-EgO" secondAttribute="bottom" constant="8" symbolic="YES" id="DWx-eg-aXQ"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="dXd-tI-8Hz" secondAttribute="trailing" constant="10" id="IcA-u8-kFc"/>
+                    <constraint firstItem="AbY-cg-k26" firstAttribute="trailing" secondItem="yMg-5w-ael" secondAttribute="trailingMargin" id="QYx-5S-e4z"/>
                     <constraint firstItem="Xm4-VP-VNr" firstAttribute="leading" secondItem="yMg-5w-ael" secondAttribute="leadingMargin" id="Zy8-k3-451"/>
                     <constraint firstItem="gtr-Pa-Abq" firstAttribute="leading" secondItem="Otd-Gf-EgO" secondAttribute="trailing" constant="10" id="au1-Vb-aRr"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="AbY-cg-k26" secondAttribute="bottom" constant="14" id="dSo-wj-Ng8"/>
                     <constraint firstItem="gtr-Pa-Abq" firstAttribute="top" secondItem="Otd-Gf-EgO" secondAttribute="top" id="fmb-3v-JwI"/>
                     <constraint firstItem="dXd-tI-8Hz" firstAttribute="leading" secondItem="yMg-5w-ael" secondAttribute="leadingMargin" id="h5v-ic-TH6"/>
                     <constraint firstItem="Otd-Gf-EgO" firstAttribute="leading" secondItem="yMg-5w-ael" secondAttribute="leading" constant="12" id="lpK-tv-iO6"/>
@@ -95,6 +103,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="tableItemCount" destination="AbY-cg-k26" id="yNh-6b-LKe"/>
                 <outlet property="userContentLabel" destination="dXd-tI-8Hz" id="ssA-Jp-3h6"/>
                 <outlet property="userProfileImg" destination="Otd-Gf-EgO" id="ymq-sj-1IB"/>
             </connections>

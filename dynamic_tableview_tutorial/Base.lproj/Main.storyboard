@@ -18,7 +18,30 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="테이블 뷰" id="cm4-VV-5az"/>
+                    <navigationItem key="navigationItem" title="테이블 뷰" id="cm4-VV-5az">
+                        <leftBarButtonItems>
+                            <barButtonItem title="앞에 추가" id="QBt-bI-JoG">
+                                <connections>
+                                    <action selector="barButtonAction:" destination="BYZ-38-t0r" id="0jY-pc-NBn"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="데이터 리셋" id="z6N-SC-aNP">
+                                <connections>
+                                    <action selector="barButtonAction:" destination="BYZ-38-t0r" id="fHa-IH-jwt"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" title="뒤에 추가" id="7lo-cT-ovT">
+                            <connections>
+                                <action selector="barButtonAction:" destination="BYZ-38-t0r" id="1hJ-zd-uYo"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="appendButton" destination="7lo-cT-ovT" id="0yA-IE-qfI"/>
+                        <outlet property="prependButton" destination="QBt-bI-JoG" id="Eud-AD-hkU"/>
+                        <outlet property="resetButton" destination="z6N-SC-aNP" id="dnZ-sH-z97"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,25 +10,23 @@ import SnapKit
 
 class ViewController: UIViewController {
     
+    // MARK: - outlet
+    @IBOutlet weak var prependButton: UIBarButtonItem!
+    @IBOutlet weak var resetButton: UIBarButtonItem!
+    @IBOutlet weak var appendButton: UIBarButtonItem!
+    
     var myTableView: UITableView = {
         let tV = UITableView()
         return tV
     }()
     
-    var contentArray = [
-    "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+    var appendingCount: Int = 0
+    var prependingCount: Int = 0
     
-    "It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    var prependingArray = ["1 앞에 추가", "2 앞에 추가", "3 앞에 추가", "4 앞에 추가", "5 앞에 추가", "6 앞에 추가"]
+    var addingArray = ["1 뒤에 추가", "2 뒤에 추가", "3 뒤에 추가", "4 뒤에 추가", "5 뒤에 추가", "6 뒤에 추가"]
+    var tempArray: [String] = []
     
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.",
-    
-    "The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.",
-    
-    "Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).",
-    
-    "The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from de Finibus Bonorum et Malorum by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham."
-    ]
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -68,6 +66,23 @@ class ViewController: UIViewController {
         // 쎌 예상 높이 설정
         self.myTableView.estimatedRowHeight = 120
     }
+    
+    // MARK: - action Button methods
+    
+    @IBAction func barButtonAction(_ sender: UIBarButtonItem) {
+        print(#function, #line, "")
+        
+        switch sender {
+        case prependButton:
+            self.prependData()
+        case resetButton:
+            self.resetData()
+        case appendButton:
+            self.appendData()
+        default:
+            break
+        }
+    }
 }
 
     // MARK: - tableViewDelegate methods
@@ -79,18 +94,63 @@ extension ViewController: UITableViewDelegate {
 extension ViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        self.contentArray.count
+        self.tempArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "myTableViewCell", for: indexPath) as! MyTableViewCell
         
-        cell.userContentLabel.text = self.contentArray[indexPath.row]
+        cell.userContentLabel.text = self.tempArray[indexPath.row]
+        cell.tableItemCount.text = String(indexPath.row)
         
         return cell
     }
+}
+    // MARK: - 테이블 뷰 관련 메소드
+extension ViewController {
     
+    fileprivate func prependData() {
+        print(#function, #line, "")
+        self.tempArray.insert(contentsOf: prependingArray, at: 0)
+        self.myTableView.reloadDataAndKeepOffset()
+    }
     
+    fileprivate func appendData() {
+        print(#function, #line, "")
+        self.tempArray += addingArray
+        self.myTableView.reloadData()
+    }
+    
+    fileprivate func resetData() {
+        print(#function, #line, "")
+        self.tempArray = []
+        self.myTableView.reloadData()
+    }
+}
+
+extension UITableView {
+    
+    func reloadDataAndKeepOffset() {
+        // 스크롤링 멈추기
+        //setContentOffset(contentOffset, animated: false)
+        
+        // 데이터 추가 전 컨텐츠 사이즈
+        let beforeContentSize = contentSize
+        reloadData()
+        layoutIfNeeded()
+        
+        // 데이터 추가 후 컨텐츠 사이즈
+        let afterContentSize = contentSize
+        
+        // 데이터가 변경되고 리로드 되고 나서 컨텐츠 옵셋 계산 및 설정
+        let calculatednewOffset = CGPoint(
+            x: contentOffset.x + (afterContentSize.width - beforeContentSize.width),
+            y: contentOffset.y + (afterContentSize.height - beforeContentSize.height)
+        )
+        
+        // 변경된 옵셋 설정
+        setContentOffset(calculatednewOffset, animated: false)
+    }
 }
 
